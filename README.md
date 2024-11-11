@@ -1,0 +1,2 @@
+# IdleGame3D
+SSC_Unity_6gen_IdleGame3D
