@@ -25,7 +25,6 @@ public class PlayerIdleState : PlayerGroundState
     public override void Update()
     {
         base.Update();
-
-        
+ 
     }
 }

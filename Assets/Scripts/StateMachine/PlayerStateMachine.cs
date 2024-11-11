@@ -9,8 +9,8 @@ public class PlayerStateMachine : StateMachine
 
     // States
     public PlayerIdleState IdleState { get; private set; }
-    public PlayerWalkState WalkState { get; }
-    public PlayerRunState RunState { get; }
+    public PlayerWalkState WalkState { get; private set; }
+    public PlayerRunState RunState { get; private set; }
 
 
     //public Vector2 MovementInput { get; set; } // 플레이어 인풋을 사용할경우 동작하는 필드
@@ -19,7 +19,7 @@ public class PlayerStateMachine : StateMachine
     public float MovementSpeedModifier { get; set; }
     public float JumpForce { get; set; }
 
-    public Transform MainCamTransform { get; set; }
+    //public Transform MainCamTransform { get; set; }
 
     public PlayerStateMachine(Player player)
     {
@@ -29,7 +29,7 @@ public class PlayerStateMachine : StateMachine
         WalkState = new PlayerWalkState(this);
         RunState = new PlayerRunState(this);
 
-        MainCamTransform = Camera.main.transform;
+        //MainCamTransform = Camera.main.transform;
         MovementSpeed = player.Data.GroundData.BaseSpeed;
         RotationDamping = player.Data.GroundData.BaseRotationDamping;
     }

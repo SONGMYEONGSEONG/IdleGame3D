@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 
     public Animator Anim { get; private set; }
     public CharacterController CharacterController { get; private set; }
-
+    public PlayerEnemySearch EnemySearch { get; private set; }
     private PlayerStateMachine stateMachine;
 
     private void Awake()
@@ -21,18 +21,17 @@ public class Player : MonoBehaviour
         AnimationData.Initialize();
         Anim = GetComponentInChildren<Animator>();
         CharacterController = GetComponent<CharacterController>();
+        EnemySearch = GetComponent<PlayerEnemySearch>();
 
         stateMachine = new PlayerStateMachine(this);
         stateMachine.ChangeState(stateMachine.IdleState);
-
-
     }
 
     private void Update()
     {
         //stateMachine.HandleInput();
         stateMachine.Update();
-
+       
         //Debug
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -56,4 +55,17 @@ public class Player : MonoBehaviour
         stateMachine.PhysicsUpdate();
     }
 
+    private void LateUpdate()
+    {
+        Data.Target = EnemySearch.EnemySearch();
+
+        if (Data.Target != null)
+        {
+           
+        }
+        else
+        {
+            Data.Target = null;
+        }
+    }
 }

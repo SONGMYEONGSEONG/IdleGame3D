@@ -34,7 +34,7 @@ public class PlayerBaseState : IState
 
     public virtual void Update()
     {
-
+        Move();
     }
 
     //애니메이션은 다 사용하기에 시작,정지 메서드 생성
@@ -68,18 +68,37 @@ public class PlayerBaseState : IState
         }
     }
 
+    //private Vector3 GetMovementDirection()
+    //{
+    //    //Vector3 forward = stateMachine.MainCamTransform.forward;
+    //    //Vector3 right = stateMachine.MainCamTransform.right;
+    //    Vector3 forward = stateMachine.Player.transform.forward;
+    //    Vector3 right = stateMachine.Player.transform.right;
+
+    //    forward.y = 0;
+    //    right.y = 0;
+
+    //    forward.Normalize();
+    //    right.Normalize();
+
+    //    return forward + right ;
+    //}
+
     private Vector3 GetMovementDirection()
     {
-        Vector3 forward = stateMachine.MainCamTransform.forward;
-        Vector3 right = stateMachine.MainCamTransform.right;
 
-        forward.y = 0;
-        right.y = 0;
+        if (stateMachine.Player.Data.Target != null)
+        {
+            Vector3 TargetPos = stateMachine.Player.Data.Target.transform.position;
 
-        forward.Normalize();
-        right.Normalize();
-
-        return forward + right ;
+            Vector3 targetDir = (TargetPos - stateMachine.Player.transform.position).normalized;
+            return targetDir;
+        }
+        else
+        {
+            return stateMachine.Player.transform.forward;
+        }
+        
     }
 
     private void Move(Vector3 direction)

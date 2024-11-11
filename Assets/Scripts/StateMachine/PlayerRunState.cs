@@ -29,6 +29,6 @@ public class PlayerRunState : PlayerGroundState
 
     public override void Update()
     {
-
+        base.Update();
     }
 }

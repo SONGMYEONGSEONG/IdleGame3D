@@ -23,11 +23,11 @@ public class PlayerWalkState : PlayerGroundState
 
     public override void PhysicsUpdate()
     {
-
+       
     }
 
     public override void Update()
     {
-
+        base.Update();
     }
 }
