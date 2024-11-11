@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 
@@ -22,12 +23,32 @@ public class Player : MonoBehaviour
         CharacterController = GetComponent<CharacterController>();
 
         stateMachine = new PlayerStateMachine(this);
+        stateMachine.ChangeState(stateMachine.IdleState);
+
+
     }
 
     private void Update()
     {
         //stateMachine.HandleInput();
         stateMachine.Update();
+
+        //Debug
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            stateMachine.ChangeState(stateMachine.WalkState);
+            Debug.Log($"WalkState 변경완료");
+        }
+        else if (Input.GetKeyDown(KeyCode.W))
+        {
+            stateMachine.ChangeState(stateMachine.RunState);
+            Debug.Log($"RunState 변경완료");
+        }
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            stateMachine.ChangeState(stateMachine.IdleState);
+            Debug.Log($"IdleState 변경완료");
+        }
     }
 
     private void FixedUpdate()

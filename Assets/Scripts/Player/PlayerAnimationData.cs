@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerAnimationData
 {
     //캐릭터가 지상에 있을떄의 조건
-    [SerializeField] private string groundParameterName = "@Ground";//@ 는 해당 애니메이션 레이어로 들어간다는 의미를 뜻함
+    [SerializeField] private string groundParameterName = "@Ground";
     [SerializeField] private string idleParameterName = "Idle";
     [SerializeField] private string walkParameterName = "Walk";
     [SerializeField] private string runParameterName = "Run";
