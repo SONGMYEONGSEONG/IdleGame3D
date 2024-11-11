@@ -58,14 +58,5 @@ public class Player : MonoBehaviour
     private void LateUpdate()
     {
         Data.Target = EnemySearch.EnemySearch();
-
-        if (Data.Target != null)
-        {
-           
-        }
-        else
-        {
-            Data.Target = null;
-        }
     }
 }

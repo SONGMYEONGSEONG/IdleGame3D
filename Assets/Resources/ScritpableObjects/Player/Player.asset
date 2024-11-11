@@ -12,3 +12,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c81a1b9aac5e214a866a9ea5350339f, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  <GroundData>k__BackingField:
+    <BaseSpeed>k__BackingField: 5
+    <BaseRotationDamping>k__BackingField: 1
+    <WalkSpeedModifier>k__BackingField: 0.225
+    <RunSpeedModifier>k__BackingField: 1
+  <AirData>k__BackingField:
+    <JumpForce>k__BackingField: 4
+  <AttackData>k__BackingField:
+    <AttackInfoDatas>k__BackingField:
+    - <AttackName>k__BackingField: Attack
+      <ComboStateIndex>k__BackingField: 1
+      <ComboTransitiontTime>k__BackingField: 0.8
+      <ForceTransitiontTime>k__BackingField: 0.1
+      <Force>k__BackingField: 1
+      Damage: 5
+      <Dealing_Start_TransitionTime>k__BackingField: 0
+      <Dealing_End_TransitionTime>k__BackingField: 0
+    - <AttackName>k__BackingField: DoubleAttack
+      <ComboStateIndex>k__BackingField: 2
+      <ComboTransitiontTime>k__BackingField: 0.8
+      <ForceTransitiontTime>k__BackingField: 0.1
+      <Force>k__BackingField: 2
+      Damage: 7
+      <Dealing_Start_TransitionTime>k__BackingField: 0
+      <Dealing_End_TransitionTime>k__BackingField: 0
+    - <AttackName>k__BackingField: TripleAttack
+      <ComboStateIndex>k__BackingField: -1
+      <ComboTransitiontTime>k__BackingField: 0.8
+      <ForceTransitiontTime>k__BackingField: 0.1
+      <Force>k__BackingField: 3
+      Damage: 10
+      <Dealing_Start_TransitionTime>k__BackingField: 0
+      <Dealing_End_TransitionTime>k__BackingField: 0

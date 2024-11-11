@@ -11,7 +11,10 @@ public class PlayerStateMachine : StateMachine
     public PlayerIdleState IdleState { get; private set; }
     public PlayerWalkState WalkState { get; private set; }
     public PlayerRunState RunState { get; private set; }
+    public PlayerComboAttackState ComboAttackState { get; private set; }
 
+    public bool IsAttacking { get; set; } //현재 공격중인지 체크하는 필드
+    public bool ComboIndex { get; set; } //현재 콤보공격의 인덱스
 
     //public Vector2 MovementInput { get; set; } // 플레이어 인풋을 사용할경우 동작하는 필드
     public float MovementSpeed { get; private set; }
@@ -28,6 +31,7 @@ public class PlayerStateMachine : StateMachine
         IdleState = new PlayerIdleState(this);
         WalkState = new PlayerWalkState(this);
         RunState = new PlayerRunState(this);
+        ComboAttackState = new PlayerComboAttackState(this);
 
         //MainCamTransform = Camera.main.transform;
         MovementSpeed = player.Data.GroundData.BaseSpeed;
