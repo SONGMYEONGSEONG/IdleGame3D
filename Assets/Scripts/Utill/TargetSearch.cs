@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-//ÀüÅõ Áß¿¡´Â <ÀÏÁ¡ º¡À§ ¾È¿¡ ÀûÀ» Ã£´Â ±â´É>ÀÌ ÄÑÁö¸é ¾ÈµÊ
-//ÀÌµ¿Áß¿¡¸¸ µ¿ÀÛÇØ¾ßÇÔ 
-public class PlayerEnemySearch : MonoBehaviour
+//ì „íˆ¬ ì¤‘ì—ëŠ” <ì¼ì  ë²™ìœ„ ì•ˆì— ì ì„ ì°¾ëŠ” ê¸°ëŠ¥>ì´ ì¼œì§€ë©´ ì•ˆë¨
+//ì´ë™ì¤‘ì—ë§Œ ë™ì‘í•´ì•¼í•¨ 
+public class TargetSearch : MonoBehaviour
 {
-    public float radius = 0f;
-    public LayerMask layer;
-    public Collider[] colliders;
-    public Collider short_enemy;
+    [SerializeField] private float radius; //ì  íƒ€ê²Ÿ íƒìƒ‰ ê±°ë¦¬ 
+    [SerializeField] private GameObject shortEnemyTarget;
+    [SerializeField] private LayerMask layer; //íƒ€ê²Ÿìœ¼ë¡œ ì„¤ì •í•  ë ˆì´ì–´ ì„¤ì •
+    private Collider[] colliders;
 
 
-    public Collider EnemySearch()
+    public float Radius { get => radius; set => radius = value; }
+    public GameObject ShortEnemyTarget { get => shortEnemyTarget;  }
+
+    public void OnTargetSearch()
     {
         colliders = Physics.OverlapSphere(transform.position, radius, layer);
 
@@ -26,14 +29,13 @@ public class PlayerEnemySearch : MonoBehaviour
                 if (short_distance >= short_distance2)
                 {
                     short_distance = short_distance2;
-                    short_enemy = col;
+                    shortEnemyTarget = col.gameObject;
                 }
             }
-
-            return short_enemy;
+            return;
         }
 
-        return null;
+        shortEnemyTarget = null;
     }
 
     private void OnDrawGizmos()

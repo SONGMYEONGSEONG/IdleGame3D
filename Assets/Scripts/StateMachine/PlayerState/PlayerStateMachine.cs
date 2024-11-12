@@ -7,22 +7,19 @@ public class PlayerStateMachine : StateMachine
 {
     public Player Player { get; }
 
-    // States
+    // State
     public PlayerIdleState IdleState { get; private set; }
     public PlayerWalkState WalkState { get; private set; }
     public PlayerRunState RunState { get; private set; }
     public PlayerComboAttackState ComboAttackState { get; private set; }
 
-    public bool IsAttacking { get; set; } //ÇöÀç °ø°İÁßÀÎÁö Ã¼Å©ÇÏ´Â ÇÊµå
-    public bool ComboIndex { get; set; } //ÇöÀç ÄŞº¸°ø°İÀÇ ÀÎµ¦½º
+    public bool IsAttacking { get; set; } //í˜„ì¬ ê³µê²©ì¤‘ì¸ì§€ ì²´í¬í•˜ëŠ” í•„ë“œ
+    public int ComboIndex { get; set; } //í˜„ì¬ ì½¤ë³´ê³µê²©ì˜ ì¸ë±ìŠ¤
 
-    //public Vector2 MovementInput { get; set; } // ÇÃ·¹ÀÌ¾î ÀÎÇ²À» »ç¿ëÇÒ°æ¿ì µ¿ÀÛÇÏ´Â ÇÊµå
     public float MovementSpeed { get; private set; }
     public float RotationDamping { get; private set; }
     public float MovementSpeedModifier { get; set; }
     public float JumpForce { get; set; }
-
-    //public Transform MainCamTransform { get; set; }
 
     public PlayerStateMachine(Player player)
     {

@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Utill;
 
-//ÇÃ·¹ÀÌ¾îÀÇ FSMÀÇ »óÅÂÀÇ ºÎ¸ğÅ¬·¡½º°¡°¡ µÇ´Â  PlayerBaseState ÄÚµå
-//ÇØ´ç ÄÚµå´Â BaseState¿¡ Move°¡ default·Î ±¸ÇöµÇ¾îÀÖÀ½ 
+//í”Œë ˆì´ì–´ì˜ FSMì˜ ìƒíƒœì˜ ë¶€ëª¨í´ë˜ìŠ¤ê°€ê°€ ë˜ëŠ”  PlayerBaseState ì½”ë“œ
+//í•´ë‹¹ ì½”ë“œëŠ” BaseStateì— Moveê°€ defaultë¡œ êµ¬í˜„ë˜ì–´ìˆìŒ 
 public class PlayerBaseState : IState
 {
     protected PlayerStateMachine stateMachine;
@@ -37,7 +38,7 @@ public class PlayerBaseState : IState
         Move();
     }
 
-    //¾Ö´Ï¸ŞÀÌ¼ÇÀº ´Ù »ç¿ëÇÏ±â¿¡ ½ÃÀÛ,Á¤Áö ¸Ş¼­µå »ı¼º
+    //ì• ë‹ˆë©”ì´ì…˜ì€ ë‹¤ ì‚¬ìš©í•˜ê¸°ì— ì‹œì‘,ì •ì§€ ë©”ì„œë“œ ìƒì„±
     protected void StartAnimation(int animatorHash)
     {
         stateMachine.Player.Anim.SetBool(animatorHash, true);
@@ -68,28 +69,12 @@ public class PlayerBaseState : IState
         }
     }
 
-    //private Vector3 GetMovementDirection()
-    //{
-    //    //Vector3 forward = stateMachine.MainCamTransform.forward;
-    //    //Vector3 right = stateMachine.MainCamTransform.right;
-    //    Vector3 forward = stateMachine.Player.transform.forward;
-    //    Vector3 right = stateMachine.Player.transform.right;
-
-    //    forward.y = 0;
-    //    right.y = 0;
-
-    //    forward.Normalize();
-    //    right.Normalize();
-
-    //    return forward + right ;
-    //}
-
     private Vector3 GetMovementDirection()
     {
-
-        if (stateMachine.Player.Data.Target != null)
+        
+        if (stateMachine.Player.EnemySearch.ShortEnemyTarget != null)
         {
-            Vector3 TargetPos = stateMachine.Player.Data.Target.transform.position;
+            Vector3 TargetPos = stateMachine.Player.EnemySearch.ShortEnemyTarget.transform.position;
 
             Vector3 targetDir = (TargetPos - stateMachine.Player.transform.position).normalized;
             return targetDir;
@@ -104,7 +89,7 @@ public class PlayerBaseState : IState
     private void Move(Vector3 direction)
     {
         float movementSpeed = GetMovementSpeed();
-        //Ä³¸¯ÅÍÄÁÆ®·Ñ·¯ ÄÄÆ÷³ÍÆ®¿¡´Â Move¶ó´Â ³»ºÎ ¸Ş¼­µå°¡ ±âº»ÀûÀ¸·Î »ı¼ºµÇ¾îÀÖÀ½
+        //ìºë¦­í„°ì»¨íŠ¸ë¡¤ëŸ¬ ì»´í¬ë„ŒíŠ¸ì—ëŠ” Moveë¼ëŠ” ë‚´ë¶€ ë©”ì„œë“œê°€ ê¸°ë³¸ì ìœ¼ë¡œ ìƒì„±ë˜ì–´ìˆìŒ
         stateMachine.Player.CharacterController.Move((direction * movementSpeed) * Time.deltaTime);
     }
 
@@ -114,4 +99,26 @@ public class PlayerBaseState : IState
         return movementSpeed;
     }
 
+    //ì• ë‹ˆë©”ì´ì…˜ì´ ì–´ë””ì¯¤ ì§„í–‰ ë˜ê³  ìˆëŠ”ì§€ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
+    //ê³µê²©ì´ ê°€ëŠ¥í•œ ì‹œì  ë˜ëŠ” ì½¤ë³´ê°€ ê°€ëŠ¥í•œì§€ ì²´í¬í•´ì£¼ëŠ” ë©”ì„œë“œ 
+    protected float GetNormalizedTime(Animator animator, string tag)
+    {
+        AnimatorStateInfo currentInfo = animator.GetCurrentAnimatorStateInfo(0);//í˜„ì¬ ì• ë‹ˆë©”ì´ì…˜ ì¸í¬ ,(0)ì€ ë ˆì´ì–´ ì¸ë±ìŠ¤ë¥¼ ì˜ë¯¸
+        AnimatorStateInfo nextInfo = animator.GetNextAnimatorStateInfo(0);
+
+        //ì „í™˜ë˜ê³  ìˆì„ë•Œ && ë‹¤ìŒ ì• ë‹ˆë©”ì´ì…˜ tag
+        if (animator.IsInTransition(0) && nextInfo.IsTag(tag))
+        {
+            return nextInfo.normalizedTime;
+        }
+        //ì „í™˜ë˜ê³  ìˆì§€ ì•Šì„ë•Œ && í˜„ì¬ ì• ë‹ˆë©”ì´ì…˜ tag
+        else if (!animator.IsInTransition(0) && currentInfo.IsTag(tag))
+        {
+            return currentInfo.normalizedTime;
+        }
+        else
+        {
+            return 0f;
+        }
+    }
 }

@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 
     public Animator Anim { get; private set; }
     public CharacterController CharacterController { get; private set; }
-    public PlayerEnemySearch EnemySearch { get; private set; }
+    public TargetSearch EnemySearch { get; private set; }
     private PlayerStateMachine stateMachine;
 
     private void Awake()
@@ -21,33 +21,20 @@ public class Player : MonoBehaviour
         AnimationData.Initialize();
         Anim = GetComponentInChildren<Animator>();
         CharacterController = GetComponent<CharacterController>();
-        EnemySearch = GetComponent<PlayerEnemySearch>();
+        EnemySearch = GetComponent<TargetSearch>();
 
         stateMachine = new PlayerStateMachine(this);
-        stateMachine.ChangeState(stateMachine.IdleState);
+        stateMachine.ChangeState(stateMachine.RunState);
+    }
+
+    private void Start()
+    {
+        EnemySearch.Radius = Data.TargetSearchData.Distance;
     }
 
     private void Update()
     {
-        //stateMachine.HandleInput();
-        stateMachine.Update();
-       
-        //Debug
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            stateMachine.ChangeState(stateMachine.WalkState);
-            Debug.Log($"WalkState 변경완료");
-        }
-        else if (Input.GetKeyDown(KeyCode.W))
-        {
-            stateMachine.ChangeState(stateMachine.RunState);
-            Debug.Log($"RunState 변경완료");
-        }
-        else if (Input.GetKeyDown(KeyCode.E))
-        {
-            stateMachine.ChangeState(stateMachine.IdleState);
-            Debug.Log($"IdleState 변경완료");
-        }
+        stateMachine.Update();      
     }
 
     private void FixedUpdate()
@@ -57,6 +44,16 @@ public class Player : MonoBehaviour
 
     private void LateUpdate()
     {
-        Data.Target = EnemySearch.EnemySearch();
+        stateMachine.Player.EnemySearch.OnTargetSearch();
+
+        if (stateMachine.Player.EnemySearch.ShortEnemyTarget != null && Data.AttackData.AttackDist >= Vector3.Distance(stateMachine.Player.EnemySearch.ShortEnemyTarget.transform.position,transform.position))
+        {
+            stateMachine.IsAttacking = true;
+        }
+        else
+        {
+            stateMachine.IsAttacking = false;
+            stateMachine.ChangeState(stateMachine.RunState);
+        }
     }
 }

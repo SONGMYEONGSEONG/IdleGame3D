@@ -1,64 +1,19 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-[Serializable]
-public class PlayerGroundData // Ä³¸¯ÅÍ°¡ Áö»ó¿¡ ÀÖÀ»¶§
-{
-    [field: SerializeField][field: Range(0f, 25f)] public float BaseSpeed { get; private set; } = 5f; // Ä³¸¯ÅÍÀÇ ¼Óµµ ±âÁØ , ÇØ´ç°ª¿¡ °öÇØÁüÀ¸·Î Ä³¸¯ÅÍÀÇ µ¿ÀÛ½Ã ¼ÓµµÀÇ °á°ú°ªÀÌ µÊ 
-    [field: SerializeField][field: Range(0f, 25f)] public float BaseRotationDamping { get; private set; } = 1f; // È¸Àü ¼Óµµ
-
-    [field: Header("IdleData")]
-
-    [field: Header("WalkData")]
-    [field: SerializeField][field: Range(0f, 2f)] public float WalkSpeedModifier { get; private set; } = 0.225f; //ÀÌµ¿½Ã ¼Óµµ ¹èÀ² ,  baseSpeed¿¡ °öÇØÁú °ª
-
-    [field: Header("RunData")]
-    [field: SerializeField][field: Range(0f, 2f)] public float RunSpeedModifier { get; private set; } = 1f; //´Ş¸®±â½Ã ¼Óµµ ¹èÀ² ,  baseSpeed¿¡ °öÇØÁú °ª
-}
-
-[Serializable]
-public class PlayerAirData // Ä³¸¯ÅÍ°¡ °øÁß¿¡ ÀÖÀ»¶§
-{
-    [field: Header("JumpData")]
-    [field: SerializeField][field: Range(0f, 25f)] public float JumpForce { get; private set; } = 4f; // Á¡ÇÁ½Ã Àû¿ëµÇ´Â ÆÄ¿ö
-
-}
-
-[Serializable]
-public class PlayerAttackData //Ä³¸¯ÅÍ°¡ °ø°İ½Ã »ç¿ëµÇ´Â µ¥ÀÌÅÍ
-{
-    [field: SerializeField] public List<AttackInfoData> AttackInfoDatas { get; private set; } //°ø°İ½Ã Àû¿ëµÇ´Â ÄŞº¸ µ¥ÀÌÅÍ
-    public int GetAttackInfoCount() { return AttackInfoDatas.Count; } //ÄŞº¸ °ø°İ ¸®½ºÆ®¿¡ µé¾îÀÖ´Â ÃÑ °ø°İ ÄŞº¸ °¹¼ö
-    public AttackInfoData GetAttackInfo(int index) { return AttackInfoDatas[index]; } //ÀÎÀÚ°ªÀ¸·Î ¿äÃ»ÇÑ ÄŞº¸°ø°İÀ» GetÇÏ´Â ¸Ş¼­µå
-}
+using Utill;
 
 
-[Serializable]
-public class AttackInfoData //Ä³¸¯ÅÍ°¡ ÄŞº¸°ø°İ½Ã »ç¿ëµÇ´Â µ¥ÀÌÅÍ
-{
- 
-    [field: SerializeField] public string AttackName { get; private set; }
-    [field: SerializeField] public string ComboStateIndex { get; private set; } //ÄŞº¸ ¼ø¼­
-    [field: SerializeField][field: Range(0f, 1f)] public float ComboTransitiontTime { get; private set; } //ÄŞº¸ À¯Áö ½Ã°£
-    [field: SerializeField][field: Range(0f, 1f)] public float ForceTransitiontTime { get; private set; } //°ø°İ¿¡ ¸ÂÀº ÀûÀº »ìÂ¦ µÚ·Î ¹Ğ¸±¶§ °¡´ÉÇÑ ½Ã°£´ëÀÎÁö Ã¼Å©ÇÏ´Â º¯¼ö
-    [field: SerializeField][field: Range(-10f, 10f)] public float Force { get; private set; } //¹Ğ¸±¶§ Àû¿ëµÇ´Â Èû
-    [field: SerializeField] public int Damage;
-    [field: SerializeField][field: Range(0f, 1f)] public float Dealing_Start_TransitionTime { get; private set; }
-    [field: SerializeField][field: Range(0f, 1f)] public float Dealing_End_TransitionTime { get; private set; }
-
-}
 
 [CreateAssetMenu(fileName = "Player", menuName = "Characters/Player")]
 public class PlayerSO : ScriptableObject
 {
-    //Debug : EnemySerach¿¡ »ç¿ëµÇ´Â Target ÇÊµå
-    [field: SerializeField]
-    public Collider Target = null;
+    //Debug : EnemySerachì— ì‚¬ìš©ë˜ëŠ” Target í•„ë“œ
+   
+    [field: SerializeField] public TargetSearchData TargetSearchData { get; private set; }
     [field: SerializeField] public PlayerGroundData GroundData { get; private set; }
-    [field: SerializeField] public PlayerAirData AirData { get; private set; }
-
     [field: SerializeField] public PlayerAttackData AttackData { get; private set; }
 
 
