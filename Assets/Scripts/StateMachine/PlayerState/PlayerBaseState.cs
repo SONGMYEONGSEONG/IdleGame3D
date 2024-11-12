@@ -18,6 +18,8 @@ public class PlayerBaseState : IState
         groundData = stateMachine.Player.Data.GroundData;
     }
 
+    //가져온 모델링에 조인트가 없음 + 방치형 게임이기에 판정이 상대적으로 중요하지 않다 생각
+    [SerializeField] private Collider AttackArea;
     public virtual void Enter()
     {
 

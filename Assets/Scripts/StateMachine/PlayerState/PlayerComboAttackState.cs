@@ -22,6 +22,8 @@ public class PlayerComboAttackState : PlayerAttackState
         int comboindex = stateMachine.ComboIndex;
         attackInfoData = stateMachine.Player.Data.AttackData.GetAttackInfo(comboindex);
         stateMachine.Player.Anim.SetInteger("Combo", comboindex);
+
+        stateMachine.Player.OnEnableAttackArea();
     }
 
     public override void Exit()
@@ -29,11 +31,11 @@ public class PlayerComboAttackState : PlayerAttackState
         base.Exit();
         StopAnimation(stateMachine.Player.AnimationData.ComboAttackParameterHash);
 
-        if(!alreadyApplyCombo)
+        if (!alreadyApplyCombo)
         {
             stateMachine.ComboIndex = 0; //콤보 초기화
         }
-       
+
     }
 
     public override void PhysicsUpdate()
@@ -56,16 +58,18 @@ public class PlayerComboAttackState : PlayerAttackState
     {
         base.Update();
 
-
         float normalizedTime = GetNormalizedTime(stateMachine.Player.Anim, "Attack");
         if (normalizedTime < 1f)
         {
-                TryComboAttack();
+            TryComboAttack();
         }
         else
         {
+            stateMachine.Player.OnDisAbleAttackArea();
+
             if (alreadyApplyCombo)
             {
+                stateMachine.Player.OnEnableAttackArea();
                 stateMachine.ComboIndex = attackInfoData.ComboStateIndex;
                 stateMachine.ChangeState(stateMachine.ComboAttackState);
             }

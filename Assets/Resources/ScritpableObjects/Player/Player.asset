@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c81a1b9aac5e214a866a9ea5350339f, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
+  Health: 0
   <TargetSearchData>k__BackingField:
     TargetLayer:
       serializedVersion: 2
@@ -23,7 +24,7 @@ MonoBehaviour:
     <WalkSpeedModifier>k__BackingField: 0.225
     <RunSpeedModifier>k__BackingField: 1
   <AttackData>k__BackingField:
-    <AttackDist>k__BackingField: 3
+    <AttackDist>k__BackingField: 2.2
     <AttackInfoDatas>k__BackingField:
     - <AttackName>k__BackingField: Attack
       <ComboStateIndex>k__BackingField: 1

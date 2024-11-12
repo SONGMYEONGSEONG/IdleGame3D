@@ -23,20 +23,20 @@ public class EnemyChaseState : EnemyBastState
 
     public override void Update()
     {
-        base.Update();
-
         //추격하는 대상이 사라지면 Idle 대기로 변경 
         if(stateMachine.Enemy.PlayerSearch.ShortEnemyTarget == null)
         {
             stateMachine.IsAttacking = false;
             stateMachine.ChangeState(stateMachine.IdleState);
         }
-
         else if (stateMachine.Enemy.Data.AttackData.AttackDist >= Vector3.Distance(stateMachine.Enemy.PlayerSearch.ShortEnemyTarget.transform.position, stateMachine.Enemy.transform.position))
         {
             stateMachine.IsAttacking = true;
             stateMachine.ChangeState(stateMachine.AttackState);
         }
-        
+        else
+        {
+            base.Update();
+        }
     }
 }

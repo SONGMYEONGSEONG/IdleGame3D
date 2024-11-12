@@ -1,10 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
+using Utill;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageAble
 {
     [field: SerializeField] public PlayerSO Data {  get; private set; }
 
@@ -14,7 +16,10 @@ public class Player : MonoBehaviour
     public Animator Anim { get; private set; }
     public CharacterController CharacterController { get; private set; }
     public TargetSearch EnemySearch { get; private set; }
+    public AttackArea AttackArea { get; private set; }
     private PlayerStateMachine stateMachine;
+
+    public event Action OnEventDie;
 
     private void Awake()
     {
@@ -22,9 +27,12 @@ public class Player : MonoBehaviour
         Anim = GetComponentInChildren<Animator>();
         CharacterController = GetComponent<CharacterController>();
         EnemySearch = GetComponent<TargetSearch>();
+        AttackArea = GetComponentInChildren<AttackArea>();
 
         stateMachine = new PlayerStateMachine(this);
         stateMachine.ChangeState(stateMachine.RunState);
+
+        AttackArea.OnEventTakeDamage += TakeDamage;
     }
 
     private void Start()
@@ -55,5 +63,30 @@ public class Player : MonoBehaviour
             stateMachine.IsAttacking = false;
             stateMachine.ChangeState(stateMachine.RunState);
         }
+    }
+
+    public void OnEnableAttackArea()
+    {
+        AttackArea.gameObject.SetActive(true);
+    }
+
+    public void OnDisAbleAttackArea()
+    {
+        AttackArea.gameObject.SetActive(false);
+    }
+
+    public float GetCurretnHealth()
+    {
+        throw new NotImplementedException();
+    }
+
+    public float Heal(float value)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void TakeDamage(float damage)
+    {
+        Debug.Log($"{gameObject.name} : {damage} Hit");
     }
 }

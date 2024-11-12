@@ -23,7 +23,6 @@ public class EnemyIdleState : EnemyBastState
 
     public override void Update()
     {
-        base.Update();
         stateMachine.Enemy.PlayerSearch.OnTargetSearch();
 
         //플레이어를 발견했을경우 추격 모드로 변경 
@@ -34,8 +33,11 @@ public class EnemyIdleState : EnemyBastState
         }
         else//타겟이 없으면 idle 상태로 유지 
         {
+            base.Update();
             //stateMachine.IsAttacking = false;  
             //stateMachine.ChangeState(stateMachine.IdleState);
         }
+
+       
     }
 }

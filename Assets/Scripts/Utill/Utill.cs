@@ -5,6 +5,17 @@ using UnityEngine;
 
 namespace Utill
 {
+    interface IDamageAble // 데미지를 입는 객체가 가지는 interface입니다.
+    {
+        //public void TakeDamage(int damage);//데미지를 입습니다.
+
+      
+        public event Action OnEventDie; //Hp가 0이 되었을때 동작하는 이벤트 함수입니다.
+        public void TakeDamage(float damage); //공격 받았을때 데미지 적용 메서드입니다. 
+        public float GetCurretnHealth();//현재 체력을 확인합니다.
+        public float Heal(float value);//객체의 체력을 회복시킵니다.
+    }
+
     [Serializable]
     public class PlayerGroundData // 캐릭터가 지상에 있을때
     {
