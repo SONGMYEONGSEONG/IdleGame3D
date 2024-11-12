@@ -19,7 +19,7 @@ MonoBehaviour:
     TargetLayer:
       serializedVersion: 2
       m_Bits: 64
-    Distance: 5
+    Distance: 7
   <AttackData>k__BackingField:
     <AttackDist>k__BackingField: 2
     <AttackInfoDatas>k__BackingField:

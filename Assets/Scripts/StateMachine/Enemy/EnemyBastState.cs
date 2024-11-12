@@ -86,6 +86,10 @@ public class EnemyBastState : IState
         float movementSpeed = GetMovementSpeed();
         //캐릭터컨트롤러 컴포넌트에는 Move라는 내부 메서드가 기본적으로 생성되어있음
         stateMachine.Enemy.CharacterController.Move((direction * movementSpeed) * Time.deltaTime);
+
+        //중력처리
+        Vector3 velocity = new Vector3(0, -9.81f, 0);
+        stateMachine.Enemy.CharacterController.Move(velocity);
     }
 
     private float GetMovementSpeed()

@@ -21,8 +21,8 @@ MonoBehaviour:
       m_Bits: 64
     Distance: 5
   <AttackData>k__BackingField:
-    <AttackDist>k__BackingField: 2
+    <AttackDist>k__BackingField: 10
     <AttackInfoDatas>k__BackingField:
     - <AttackName>k__BackingField: FirstAttack
       <ComboStateIndex>k__BackingField: 0
-      Damage: 10
+      Damage: 30
