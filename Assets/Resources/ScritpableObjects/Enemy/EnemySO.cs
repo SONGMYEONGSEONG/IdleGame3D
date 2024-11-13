@@ -16,6 +16,11 @@ public class EnemySO : ScriptableObject
     public int Level;
     public int DropExp;
     public int DropGold;
+    public ItemBase[] DropItemList;
+
+    public int ExtraHealth;
+    public int ExtraMana;
+    public int ExtraDamage;
 
     // 캐릭터의 속도 기준 , 해당값에 곱해짐으로 캐릭터의 동작시 속도의 결과값이 됨 
     [field: SerializeField][field: Range(0f, 25f)] public float BaseSpeed { get; private set; } = 5f;

@@ -19,6 +19,8 @@ public class Player : MonoBehaviour, IDamageAble
     public event Action OnEventDie;
     public HealthSystem Health;
 
+
+
     private void Awake()
     {
         GameManager.Instance.Player = this;
@@ -43,6 +45,12 @@ public class Player : MonoBehaviour, IDamageAble
     private void Start()
     {
         EnemySearch.Radius = Data.TargetSearchData.Distance;
+
+        //TestCode 
+        Data.Inventory.Add(ItemManager.Instance.GetItem<ItemEquip>(2000).ItemData);
+
+        Debug.Log("ItemSet");
+        //
     }
 
     private void Update()
@@ -99,7 +107,7 @@ public class Player : MonoBehaviour, IDamageAble
 
     public int GetCurrentAttackDamage()
     {
-        return stateMachine.ComboAttackState.AttackInfoData.Damage;
+        return stateMachine.ComboAttackState.AttackInfoData.Damage + Data.ExtraDamage;
     }
 
     void OnDie()

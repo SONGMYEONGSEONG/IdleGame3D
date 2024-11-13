@@ -88,7 +88,7 @@ public class Enemy : MonoBehaviour, IDamageAble
 
     public int GetCurrentAttackDamage()
     {
-        return stateMachine.AttackState.AttackInfoData.Damage;
+        return stateMachine.AttackState.AttackInfoData.Damage + Data.ExtraDamage;
     }
 
     void OnDie()
@@ -98,6 +98,8 @@ public class Enemy : MonoBehaviour, IDamageAble
 
         //Enemy가 죽음으로써 플레이어의 재화를 증가시켜줌
         GameManager.Instance.Player.Data.curCoin += Data.DropGold;
+
+
 
         Invoke("ObjectDestroy", 0.3f);
     }

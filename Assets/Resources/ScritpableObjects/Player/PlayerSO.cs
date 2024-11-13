@@ -19,6 +19,12 @@ public class PlayerSO : ScriptableObject
     public int MaxExp;
     public int curCoin;
 
+    public int ExtraHealth;
+    public int ExtraMana;
+    public int ExtraDamage;
+
+    public List<ItemSO> Inventory;
+
     [field: SerializeField] public TargetSearchData TargetSearchData { get; private set; }
     [field: SerializeField] public PlayerGroundData GroundData { get; private set; }
     [field: SerializeField] public PlayerAttackData AttackData { get; private set; }
