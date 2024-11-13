@@ -1,10 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
-using UnityEngine.Playables;
 using Utill;
 
 public class Enemy : MonoBehaviour, IDamageAble
@@ -19,6 +14,7 @@ public class Enemy : MonoBehaviour, IDamageAble
     public CharacterController CharacterController { get; private set; }
     public TargetSearch PlayerSearch { get; private set; }
     public AttackArea AttackArea { get; private set; }
+    public DamageIndicator DamageIndicator { get; private set; }
     private EnemyStateMachine stateMachine; //Enemy 전용 StateMachine으로 변경 
 
     public event Action OnEventDie;
@@ -31,6 +27,7 @@ public class Enemy : MonoBehaviour, IDamageAble
         CharacterController = GetComponent<CharacterController>();
         PlayerSearch = GetComponent<TargetSearch>();
         AttackArea = GetComponentInChildren<AttackArea>();
+        DamageIndicator = GetComponentInChildren<DamageIndicator>();
 
         stateMachine = new EnemyStateMachine(this);
         stateMachine.ChangeState(stateMachine.IdleState);
@@ -39,6 +36,7 @@ public class Enemy : MonoBehaviour, IDamageAble
         OnDisAbleAttackArea();
 
         Health = new HealthSystem(Data.Health);
+        Health.OnDie += OnDie;
     }
 
     private void Start()
@@ -85,10 +83,25 @@ public class Enemy : MonoBehaviour, IDamageAble
     public void TakeDamage(int damage)
     {
         Health.OnDamage(damage);
+        DamageIndicator.PrintDamage(damage);
     }
 
     public int GetCurrentAttackDamage()
     {
         return stateMachine.AttackState.AttackInfoData.Damage;
+    }
+
+    void OnDie()
+    {
+        Anim.SetTrigger("Die");
+        enabled = false;
+
+        Invoke("ObjectDestroy", 0.3f);
+    }
+
+    private void ObjectDestroy()
+    {
+        //objectpool로 대체될것 
+        Destroy(this.gameObject);
     }
 }

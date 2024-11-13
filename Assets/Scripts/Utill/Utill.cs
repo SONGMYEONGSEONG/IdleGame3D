@@ -44,6 +44,7 @@ namespace Utill
     [Serializable]
     public class AttackInfoData //캐릭터가 콤보공격시 사용되는 데이터
     {
+        [field: SerializeField] public float AttackSped { get; private set; } // 공격속도를 설정하는 변수이며 , 애니메이션 속도를 건들게됨
         [field: SerializeField] public string AttackName { get; private set; }
         [field: SerializeField] public int ComboStateIndex { get; private set; } //콤보 순서
 

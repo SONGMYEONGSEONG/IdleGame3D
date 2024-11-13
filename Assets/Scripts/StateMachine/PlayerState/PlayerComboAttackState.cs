@@ -24,8 +24,9 @@ public class PlayerComboAttackState : PlayerAttackState
         int comboindex = stateMachine.ComboIndex;
         attackInfoData = stateMachine.Player.Data.AttackData.GetAttackInfo(comboindex);
         stateMachine.Player.Anim.SetInteger("Combo", comboindex);
+        stateMachine.Player.Anim.SetFloat("SpeedMultiplier", attackInfoData.AttackSped);
 
-        stateMachine.Player.OnEnableAttackArea();
+       stateMachine.Player.OnEnableAttackArea();
     }
 
     public override void Exit()

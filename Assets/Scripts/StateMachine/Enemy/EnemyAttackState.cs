@@ -21,6 +21,7 @@ public class EnemyAttackState : EnemyBastState
         int comboindex = stateMachine.ComboIndex;
         attackInfoData = stateMachine.Enemy.Data.AttackData.GetAttackInfo(comboindex);
         StartAnimation(stateMachine.Enemy.AnimationData.ComboAttackParameterHash);
+        stateMachine.Enemy.Anim.SetFloat("SpeedMultiplier", attackInfoData.AttackSped);
 
         stateMachine.Enemy.OnEnableAttackArea();
     }

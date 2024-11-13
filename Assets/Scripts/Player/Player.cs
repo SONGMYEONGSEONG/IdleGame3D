@@ -17,6 +17,7 @@ public class Player : MonoBehaviour, IDamageAble
     public CharacterController CharacterController { get; private set; }
     public TargetSearch EnemySearch { get; private set; }
     public AttackArea AttackArea { get; private set; }
+    public DamageIndicator DamageIndicator { get; private set; }
     private PlayerStateMachine stateMachine;
 
     public event Action OnEventDie;
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour, IDamageAble
         CharacterController = GetComponent<CharacterController>();
         EnemySearch = GetComponent<TargetSearch>();
         AttackArea = GetComponentInChildren<AttackArea>();
+        DamageIndicator = GetComponentInChildren<DamageIndicator>();
 
         stateMachine = new PlayerStateMachine(this);
         stateMachine.ChangeState(stateMachine.RunState);
@@ -37,6 +39,7 @@ public class Player : MonoBehaviour, IDamageAble
         OnDisAbleAttackArea();
 
         Health = new HealthSystem(Data.Health);
+        Health.OnDie += OnDie;
     }
 
     private void Start()
@@ -92,11 +95,18 @@ public class Player : MonoBehaviour, IDamageAble
     public void TakeDamage(int damage)
     {
         Health.OnDamage(damage);
+        DamageIndicator.PrintDamage(damage);
     }
 
 
     public int GetCurrentAttackDamage()
     {
         return stateMachine.ComboAttackState.AttackInfoData.Damage;
+    }
+
+    void OnDie()
+    {
+        Anim.SetTrigger("Die");
+        enabled = false;
     }
 }

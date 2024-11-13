@@ -26,12 +26,15 @@ MonoBehaviour:
   <AttackData>k__BackingField:
     <AttackDist>k__BackingField: 2.2
     <AttackInfoDatas>k__BackingField:
-    - <AttackName>k__BackingField: Attack
+    - <AttackSped>k__BackingField: 3
+      <AttackName>k__BackingField: Attack
       <ComboStateIndex>k__BackingField: 1
       Damage: 2
-    - <AttackName>k__BackingField: DoubleAttack
+    - <AttackSped>k__BackingField: 3
+      <AttackName>k__BackingField: DoubleAttack
       <ComboStateIndex>k__BackingField: 2
       Damage: 5
-    - <AttackName>k__BackingField: TripleAttack
+    - <AttackSped>k__BackingField: 2
+      <AttackName>k__BackingField: TripleAttack
       <ComboStateIndex>k__BackingField: -1
       Damage: 9
