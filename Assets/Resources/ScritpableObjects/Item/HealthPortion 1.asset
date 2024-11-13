@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d79dcb295a0888f4bb18c61645fb748e, type: 3}
   m_Name: HealthPortion 1
   m_EditorClassIdentifier: 
-  ItemID: 1000
+  ItemID: 1001
   ItemType: 0
   IsEquip: 0
   ItemName: "\uD68C\uBCF5 \uBB3C\uC57D"

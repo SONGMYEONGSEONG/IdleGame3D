@@ -19,7 +19,7 @@ MonoBehaviour:
   Level: 1
   Exp: 10
   MaxExp: 100
-  curCoin: 590
+  curCoin: 610
   ExtraHealth: 0
   ExtraMana: 0
   ExtraDamage: 20

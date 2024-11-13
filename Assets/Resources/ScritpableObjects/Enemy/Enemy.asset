@@ -21,6 +21,7 @@ MonoBehaviour:
   DropGold: 10
   DropItemList:
   - {fileID: 11400000, guid: 65dd658e6cebb6848a22d85dc3c60267, type: 2}
+  - {fileID: 11400000, guid: 2d432cbcbc9c860448f4ce2e33b5f9df, type: 2}
   - {fileID: 11400000, guid: cb143c98627b45b4e915019146bd0ab6, type: 2}
   - {fileID: 11400000, guid: bd2c17e3fce99564fbb09baa02991d16, type: 2}
   - {fileID: 11400000, guid: 69e8851d50f3ef64f82f0fb1c7c18a05, type: 2}
