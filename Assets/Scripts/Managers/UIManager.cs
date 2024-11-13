@@ -5,18 +5,12 @@ using Utill;
 
 public class UIManager : Singleton<UIManager>
 {
-    [SerializeField] private List<UIBase> UIList;
 
     private Dictionary<string, UIBase> UIDictionary = new Dictionary<string, UIBase>();
 
     protected override void Awake()
     {
         base.Awake();
-
-        for (int i = 0; i < UIList.Count; i++)
-        {
-            UIDictionary.Add(UIList[i].UIName, UIList[i]);
-        }
     }
 
     public void UISet(UIBase UI)

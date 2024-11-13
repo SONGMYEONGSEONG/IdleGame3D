@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour, IDamageAble
         AttackArea.OnEventTakeDamage += TakeDamage;
         OnDisAbleAttackArea();
 
-        Health = new HealthSystem(Data.Health,Data.MaxHealth);
+        Health = new HealthSystem(Data.Health,Data.MaxHealth,Data.MaxHealth,Data.MaxMana);
         Health.OnDie += OnDie;
     }
 
@@ -95,6 +95,9 @@ public class Enemy : MonoBehaviour, IDamageAble
     {
         Anim.SetTrigger("Die");
         enabled = false;
+
+        //Enemy가 죽음으로써 플레이어의 재화를 증가시켜줌
+        GameManager.Instance.Player.Data.curCoin += Data.DropGold;
 
         Invoke("ObjectDestroy", 0.3f);
     }

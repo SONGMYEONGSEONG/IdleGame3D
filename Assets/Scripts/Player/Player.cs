@@ -36,7 +36,7 @@ public class Player : MonoBehaviour, IDamageAble
         AttackArea.OnEventTakeDamage += TakeDamage;
         OnDisAbleAttackArea();
 
-        Health = new HealthSystem(Data.Health,Data.MaxHealth);
+        Health = new HealthSystem(Data.Health, Data.MaxHealth, Data.MaxHealth, Data.MaxMana);
         Health.OnDie += OnDie;
     }
 

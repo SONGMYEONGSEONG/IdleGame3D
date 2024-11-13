@@ -29,7 +29,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (_uiMain != null)
         {
-            _uiMain.PlayerStatusUpdate(player.Data.Health, player.Data.Mana);
+            _uiMain.PlayerStatusUpdate(player.Health.CurHealth, player.Data.Mana);
             _uiMain.PlayerLevelUpdate(player.Data.Level, player.Data.Exp);
             _uiMain.PlayerGetCoinUpdate(player.Data.curCoin);
 
