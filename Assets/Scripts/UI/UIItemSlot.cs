@@ -3,43 +3,51 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class UIItemSlot : MonoBehaviour
 {
-    public bool Test;
-
+    public int ItemID;
     [SerializeField] private Image ItemIcon;
     [SerializeField] private TextMeshProUGUI ItemName;
     [SerializeField] private TextMeshProUGUI ItemDesc;
     [SerializeField] private Button ItemUseBtn;
+    [SerializeField] private TextMeshProUGUI ItemUseBtnText;
 
-
-    private void Start()
+    public void Initialize<T>(T ItemData) where T : ItemBase
     {
-        if(Test)
+        ItemID = ItemData.ItemData.ItemID;
+
+        ItemIcon.sprite = ItemData.ItemData.ItemSprite;
+        ItemName.text = ItemData.ItemData.ItemName;
+        ItemDesc.text = ItemData.ItemData.ItemDesc;
+
+        switch (ItemData.ItemData.ItemType)
         {
-            //Debug
-            ItemEquip item = ItemManager.Instance.GetItem<ItemEquip>(2000);
-            ItemIcon.sprite = item.ItemData.ItemSprite;
-            ItemName.text = item.ItemData.ItemName;
-            ItemDesc.text = item.ItemData.ItemDesc;
+            case ItemType.Consumable:
+                ItemUseBtn.onClick.AddListener(() => ItemData.UseItem());
+                ItemUseBtn.onClick.AddListener(() => GameManager.Instance.Player._Inventory.DeleteInventoryItem(ItemData.ItemData.ItemID));
+                ItemUseBtn.onClick.AddListener(() => UIManager.Instance.GetUI<UIInventory>("UIInventory").DeleteInventoryItem(ItemData.ItemData.ItemID));
+                ItemUseBtn.onClick.AddListener(() => Destroy(gameObject));
+                break;
+            case ItemType.Equip:
+                IsEquipItemBtnChange(ItemData.ItemData.IsEquip);
+                ItemUseBtn.onClick.AddListener(() => ItemData.EquipItem());
+                ItemUseBtn.onClick.AddListener(() => IsEquipItemBtnChange(ItemData.ItemData.IsEquip));
+                break;
+        }
+    }
 
-
-            ItemUseBtn.onClick.AddListener(() => item.EquipItem());
+    private void IsEquipItemBtnChange(bool isEquip)
+    {
+        if(isEquip)
+        {
+            ItemUseBtnText.text = "장착해제";
         }
         else
         {
-            //Debug
-            ItemConsumable item = ItemManager.Instance.GetItem<ItemConsumable>(1000);
-            ItemIcon.sprite = item.ItemData.ItemSprite;
-            ItemName.text = item.ItemData.ItemName;
-            ItemDesc.text = item.ItemData.ItemDesc;
-
-
-            ItemUseBtn.onClick.AddListener(() => item.UseItem());
+            ItemUseBtnText.text = "장착하기";
         }
-        
-
     }
 
 }

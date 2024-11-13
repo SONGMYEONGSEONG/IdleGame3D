@@ -23,6 +23,7 @@ MonoBehaviour:
   ExtraHealth: 0
   ExtraMana: 0
   ExtraDamage: 20
+  InventoryData: []
   <TargetSearchData>k__BackingField:
     TargetLayer:
       serializedVersion: 2

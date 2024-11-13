@@ -14,6 +14,9 @@ public class HealthSystem //Status Handler로 변경하여 사용할 예정
     public event Action OnDie;
     public bool IsDead => curHealth == 0;
 
+    public int MaxHealth { get => maxHealth; set => maxHealth = value; }
+    public int MaxMana { get => maxMana; set => maxMana = value; }
+
     public HealthSystem(int health, int maxHealth, int mana, int maxMana)
     {
         this.maxHealth = maxHealth;
@@ -41,4 +44,13 @@ public class HealthSystem //Status Handler로 변경하여 사용할 예정
         if (curMana == 0)
             Debug.Log("마나가 모자릅니다."); //UI에 띄울것 
     }
+
+    public void Heal(int value)
+    {
+        if (curHealth >= maxHealth) return;
+
+        curHealth = Mathf.Min(curHealth + value, maxHealth);
+    }
+
+ 
 }

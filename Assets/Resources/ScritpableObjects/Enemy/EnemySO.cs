@@ -16,7 +16,7 @@ public class EnemySO : ScriptableObject
     public int Level;
     public int DropExp;
     public int DropGold;
-    public ItemBase[] DropItemList;
+    public ItemSO[] DropItemList;
 
     public int ExtraHealth;
     public int ExtraMana;

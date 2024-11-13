@@ -65,21 +65,6 @@ public class Enemy : MonoBehaviour, IDamageAble
         stateMachine.PhysicsUpdate();
     }
 
-    private void LateUpdate()
-    {
-
-    }
-
-    public float GetCurretnHealth()
-    {
-        throw new NotImplementedException();
-    }
-
-    public float Heal(int value)
-    {
-        throw new NotImplementedException();
-    }
-
     public void TakeDamage(int damage)
     {
         Health.OnDamage(damage);
@@ -98,10 +83,15 @@ public class Enemy : MonoBehaviour, IDamageAble
 
         //Enemy가 죽음으로써 플레이어의 재화를 증가시켜줌
         GameManager.Instance.Player.Data.curCoin += Data.DropGold;
-
-
+        DropItem();
 
         Invoke("ObjectDestroy", 0.3f);
+    }
+
+    private void DropItem()
+    {
+        int dropItemIndex = UnityEngine.Random.Range(0,Data.DropItemList.Length);
+        GameManager.Instance.Player._Inventory.CurItemList.Add(Data.DropItemList[dropItemIndex]);
     }
 
     private void ObjectDestroy()

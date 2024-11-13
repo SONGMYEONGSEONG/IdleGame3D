@@ -4,6 +4,7 @@ using UnityEngine;
 using Utill;
 public class ItemEquip : ItemBase
 {
+
     public ItemEquip(ItemSO data) : base(data)
     {
     }
@@ -12,9 +13,6 @@ public class ItemEquip : ItemBase
     public override void EquipItem()
     {
         ItemData.IsEquip = !ItemData.IsEquip;
-
-        Debug.Log($"{ItemData.ItemType} 입니다.");
-        Debug.Log($"{ItemData.ItemName} / {ItemData.ItemEffect[0].ItemStatusType} : {ItemData.ItemEffect[0].ItemValueAmount}입니다.");
 
         for(int i = 0; i< ItemData.ItemEffect.Length;i++ )
         {
@@ -41,9 +39,6 @@ public class ItemEquip : ItemBase
                     break;
             }
         }
-
-
-       
     }
 
     public override void UseItem()
