@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour, IDamageAble
         AttackArea.OnEventTakeDamage += TakeDamage;
         OnDisAbleAttackArea();
 
-        Health = new HealthSystem(Data.Health);
+        Health = new HealthSystem(Data.Health,Data.MaxHealth);
         Health.OnDie += OnDie;
     }
 

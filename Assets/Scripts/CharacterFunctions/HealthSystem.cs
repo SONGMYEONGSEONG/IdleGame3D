@@ -11,10 +11,10 @@ public class HealthSystem
     public event Action OnDie;
     public bool IsDead => curHealth == 0;
 
-    public HealthSystem(int maxHealth)
+    public HealthSystem(int health, int maxHealth)
     {
         this.maxHealth = maxHealth;
-        curHealth = this.maxHealth;
+        this.curHealth = health;
     }
 
     public void OnDamage(int damage)

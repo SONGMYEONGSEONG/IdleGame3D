@@ -40,9 +40,4 @@ public class DamageIndicator : MonoBehaviour
         damageText.transform.position = transform.position;
     }
 
-    private void HideObject()
-    {
-        damageText.gameObject.SetActive(false);
-    }
-
 }

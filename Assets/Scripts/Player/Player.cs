@@ -1,9 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 using Utill;
 
 public class Player : MonoBehaviour, IDamageAble
@@ -25,6 +21,8 @@ public class Player : MonoBehaviour, IDamageAble
 
     private void Awake()
     {
+        GameManager.Instance.Player = this;
+
         AnimationData.Initialize();
         Anim = GetComponentInChildren<Animator>();
         CharacterController = GetComponent<CharacterController>();
@@ -38,7 +36,7 @@ public class Player : MonoBehaviour, IDamageAble
         AttackArea.OnEventTakeDamage += TakeDamage;
         OnDisAbleAttackArea();
 
-        Health = new HealthSystem(Data.Health);
+        Health = new HealthSystem(Data.Health,Data.MaxHealth);
         Health.OnDie += OnDie;
     }
 

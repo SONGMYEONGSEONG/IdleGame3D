@@ -13,6 +13,13 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   Health: 100
+  MaxHealth: 150
+  Mana: 50
+  MaxMana: 100
+  Level: 17
+  Exp: 30
+  MaxExp: 100
+  curCoin: 500
   <TargetSearchData>k__BackingField:
     TargetLayer:
       serializedVersion: 2

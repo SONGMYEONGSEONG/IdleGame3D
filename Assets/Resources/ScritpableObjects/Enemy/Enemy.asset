@@ -12,8 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e5caa19cb813af458c3a1a4f0f5ef56, type: 3}
   m_Name: Enemy
   m_EditorClassIdentifier: 
-  Health: 50
-  <BaseSpeed>k__BackingField: 5
+  Health: 30
+  MaxHealth: 30
+  Mana: 10
+  MaxMana: 10
+  Level: 1
+  DropExp: 10
+  DropGold: 10
+  <BaseSpeed>k__BackingField: 3
   <ChaseSpeedModifier>k__BackingField: 1
   <BaseRotationDamping>k__BackingField: 1
   <TargetSearchData>k__BackingField:
