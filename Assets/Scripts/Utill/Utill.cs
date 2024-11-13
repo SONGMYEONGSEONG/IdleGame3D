@@ -11,9 +11,10 @@ namespace Utill
 
       
         public event Action OnEventDie; //Hp가 0이 되었을때 동작하는 이벤트 함수입니다.
-        public void TakeDamage(float damage); //공격 받았을때 데미지 적용 메서드입니다. 
+        public void TakeDamage(int damage); //공격 받았을때 데미지 적용 메서드입니다. 
+        public int GetCurrentAttackDamage();// //현재 사용중인 콤보 공격의 데미지 수치를 가져옵니다. 
         public float GetCurretnHealth();//현재 체력을 확인합니다.
-        public float Heal(float value);//객체의 체력을 회복시킵니다.
+        public float Heal(int value);//객체의 체력을 회복시킵니다.
     }
 
     [Serializable]
@@ -55,14 +56,6 @@ namespace Utill
         [field: SerializeField] public LayerMask TargetLayer; //타겟 대상 레이어
         //[field: SerializeField] public GameObject Target = null; //타겟 대상
         [field: SerializeField] public float Distance; // 타겟 탐색 범위
-    }
-
-    [Serializable]
-    public class TargetAttackData //캐릭터가 공격시 사용되는 데이터
-    {
-        [field: SerializeField] public float AttackDist { get; private set; } // 타겟과의 공격 거리가 해당 데이터보다 작으면 공격시도
-        [field: SerializeField] public List<AttackInfoData> AttackInfoDatas { get; private set; } //공격시 적용되는 콤보 데이터
-
     }
 
 }

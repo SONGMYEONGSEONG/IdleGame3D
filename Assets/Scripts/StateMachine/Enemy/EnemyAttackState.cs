@@ -5,6 +5,9 @@ using Utill;
 
 public class EnemyAttackState : EnemyBastState
 {
+    AttackInfoData attackInfoData;
+    public AttackInfoData AttackInfoData { get => attackInfoData; }
+
     public EnemyAttackState(EnemyStateMachine stateMachine) : base(stateMachine)
     {
     }
@@ -14,7 +17,11 @@ public class EnemyAttackState : EnemyBastState
         stateMachine.MovementSpeedModifier = 0f;
         base.Enter();
         StartAnimation(stateMachine.Enemy.AnimationData.AttackParameterHash);
+
+        int comboindex = stateMachine.ComboIndex;
+        attackInfoData = stateMachine.Enemy.Data.AttackData.GetAttackInfo(comboindex);
         StartAnimation(stateMachine.Enemy.AnimationData.ComboAttackParameterHash);
+
         stateMachine.Enemy.OnEnableAttackArea();
     }
 

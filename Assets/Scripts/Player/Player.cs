@@ -20,6 +20,7 @@ public class Player : MonoBehaviour, IDamageAble
     private PlayerStateMachine stateMachine;
 
     public event Action OnEventDie;
+    public HealthSystem Health;
 
     private void Awake()
     {
@@ -33,6 +34,9 @@ public class Player : MonoBehaviour, IDamageAble
         stateMachine.ChangeState(stateMachine.RunState);
 
         AttackArea.OnEventTakeDamage += TakeDamage;
+        OnDisAbleAttackArea();
+
+        Health = new HealthSystem(Data.Health);
     }
 
     private void Start()
@@ -80,13 +84,19 @@ public class Player : MonoBehaviour, IDamageAble
         throw new NotImplementedException();
     }
 
-    public float Heal(float value)
+    public float Heal(int value)
     {
         throw new NotImplementedException();
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
-        Debug.Log($"{gameObject.name} : {damage} Hit");
+        Health.OnDamage(damage);
+    }
+
+
+    public int GetCurrentAttackDamage()
+    {
+        return stateMachine.ComboAttackState.AttackInfoData.Damage;
     }
 }

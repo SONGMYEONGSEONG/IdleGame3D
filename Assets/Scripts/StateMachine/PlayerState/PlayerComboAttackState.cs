@@ -8,6 +8,8 @@ public class PlayerComboAttackState : PlayerAttackState
 
     AttackInfoData attackInfoData;
 
+    public AttackInfoData AttackInfoData { get => attackInfoData; }
+
     public PlayerComboAttackState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
     }

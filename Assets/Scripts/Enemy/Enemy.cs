@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour, IDamageAble
     private EnemyStateMachine stateMachine; //Enemy 전용 StateMachine으로 변경 
 
     public event Action OnEventDie;
+    public HealthSystem Health;
 
     private void Awake()
     {
@@ -35,6 +36,9 @@ public class Enemy : MonoBehaviour, IDamageAble
         stateMachine.ChangeState(stateMachine.IdleState);
 
         AttackArea.OnEventTakeDamage += TakeDamage;
+        OnDisAbleAttackArea();
+
+        Health = new HealthSystem(Data.Health);
     }
 
     private void Start()
@@ -73,13 +77,18 @@ public class Enemy : MonoBehaviour, IDamageAble
         throw new NotImplementedException();
     }
 
-    public float Heal(float value)
+    public float Heal(int value)
     {
         throw new NotImplementedException();
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
-        Debug.Log($"{gameObject.name} : {damage} Hit");
+        Health.OnDamage(damage);
+    }
+
+    public int GetCurrentAttackDamage()
+    {
+        return stateMachine.AttackState.AttackInfoData.Damage;
     }
 }

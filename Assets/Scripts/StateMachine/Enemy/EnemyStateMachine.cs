@@ -14,6 +14,7 @@ public class EnemyStateMachine : StateMachine
     //public EnemyComboAttackState ComboAttackState { get; private set; }
 
     public bool IsAttacking { get; set; } //현재 공격중인지 체크하는 필드
+    public int ComboIndex { get; set; } //현재 콤보공격의 인덱스
 
     public float MovementSpeed { get; private set; }
     public float RotationDamping { get; private set; }

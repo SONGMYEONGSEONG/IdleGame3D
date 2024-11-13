@@ -7,8 +7,13 @@ using Utill;
 public class AttackArea : MonoBehaviour
 {
     public LayerMask AttackTarget;
-    public event Action<float> OnEventTakeDamage; //데미지를 입었을때 동작하는 이벤트 함수입니다.\
+    public event Action<int> OnEventTakeDamage; //데미지를 입었을때 동작하는 이벤트 함수입니다.\
+    private IDamageAble myAttackinterface; //
 
+    private void Awake()
+    {
+        myAttackinterface = GetComponentInParent<IDamageAble>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,7 +21,7 @@ public class AttackArea : MonoBehaviour
         {
             if(other.TryGetComponent(out IDamageAble hitTarget))
             {
-                hitTarget.TakeDamage(30.0f);
+                hitTarget.TakeDamage(myAttackinterface.GetCurrentAttackDamage());
             }
         }
     }

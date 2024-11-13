@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c81a1b9aac5e214a866a9ea5350339f, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  Health: 0
+  Health: 100
   <TargetSearchData>k__BackingField:
     TargetLayer:
       serializedVersion: 2
@@ -28,10 +28,10 @@ MonoBehaviour:
     <AttackInfoDatas>k__BackingField:
     - <AttackName>k__BackingField: Attack
       <ComboStateIndex>k__BackingField: 1
-      Damage: 5
+      Damage: 2
     - <AttackName>k__BackingField: DoubleAttack
       <ComboStateIndex>k__BackingField: 2
-      Damage: 7
+      Damage: 5
     - <AttackName>k__BackingField: TripleAttack
       <ComboStateIndex>k__BackingField: -1
-      Damage: 10
+      Damage: 9
