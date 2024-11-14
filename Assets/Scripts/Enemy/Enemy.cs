@@ -85,6 +85,7 @@ public class Enemy : MonoBehaviour, IDamageAble , IObjectPoolAble<Enemy>
 
         //Enemy가 죽음으로써 플레이어의 재화를 증가시켜줌
         GameManager.Instance.Player.Data.curCoin += Data.DropGold;
+        GameManager.Instance.Player.Data.Exp += Data.DropExp;
         DropItem();
 
         Invoke("ObjectDestroy", 0.3f);
