@@ -305,6 +305,7 @@ MonoBehaviour:
     fallParameterName: Fall
     attackParameterName: '@Attack'
     comboAttackParameterName: ComboAttack
+  StageModifier: 1
 --- !u!114 &3874826318552362908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,7 +334,7 @@ GameObject:
   - component: {fileID: 8545535821988583617}
   - component: {fileID: 3953832051680223594}
   - component: {fileID: 3861760706568727493}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: AttackArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
