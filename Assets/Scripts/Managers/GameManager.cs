@@ -8,6 +8,8 @@ public class GameManager : Singleton<GameManager>
     public Player Player { get => player; set => player = value; }
     private UIMain _uiMain;
 
+    public Vector3 PlayerSpawnPos;
+
     protected override void Awake()
     {
         base.Awake();
@@ -18,12 +20,17 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
-            Instantiate(player);
+            PlayerRespawn();
         }
 
         _uiMain = UIManager.Instance.GetUI<UIMain>("UIMain");
     }
 
+    public void PlayerRespawn()
+    {
+        Instantiate(player);
+        player.transform.position = PlayerSpawnPos;
+    }
 
     private void Update()
     {

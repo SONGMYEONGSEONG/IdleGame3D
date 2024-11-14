@@ -28,6 +28,6 @@ public class PlayerAttackState : PlayerBaseState
 
     public override void Update()
     {
-       
+        base.Update();
     }
 }

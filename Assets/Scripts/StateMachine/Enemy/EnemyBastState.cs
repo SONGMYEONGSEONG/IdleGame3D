@@ -59,8 +59,8 @@ public class EnemyBastState : IState
         if (direction != Vector3.zero)
         {
             Transform playerTransform = stateMachine.Enemy.transform;
-
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            Vector3 Newdirection = new Vector3(direction.x, 0, direction.z);
+            Quaternion targetRotation = Quaternion.LookRotation(Newdirection);
             playerTransform.rotation = Quaternion.Slerp(playerTransform.rotation, targetRotation, stateMachine.RotationDamping * Time.deltaTime);
             
         }

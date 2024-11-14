@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Utill;
@@ -66,7 +67,9 @@ public class PlayerBaseState : IState
        if(direction != Vector3.zero)
         {
             Transform playerTransform = stateMachine.Player.transform;
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+            Vector3 Newdirection = new Vector3(direction.x, 0, direction.z);
+            Quaternion targetRotation = Quaternion.LookRotation(Newdirection);
             playerTransform.rotation = Quaternion.Slerp(playerTransform.rotation, targetRotation, stateMachine.RotationDamping * Time.deltaTime);
         }
     }
@@ -77,13 +80,14 @@ public class PlayerBaseState : IState
         if (stateMachine.Player.EnemySearch.ShortEnemyTarget != null)
         {
             Vector3 TargetPos = stateMachine.Player.EnemySearch.ShortEnemyTarget.transform.position;
-
             Vector3 targetDir = (TargetPos - stateMachine.Player.transform.position).normalized;
             return targetDir;
         }
         else
         {
-            return stateMachine.Player.transform.forward;
+            Vector3 HomePos = GameManager.Instance.PlayerSpawnPos;
+            Vector3 HomeDir = (HomePos - stateMachine.Player.transform.position).normalized;
+            return HomeDir;
         }
         
     }

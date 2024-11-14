@@ -52,5 +52,10 @@ public class HealthSystem //Status Handler로 변경하여 사용할 예정
         curHealth = Mathf.Min(curHealth + value, maxHealth);
     }
 
+    public void Respawn()
+    {
+       curHealth = maxHealth;
+       curMana = maxMana;
+    }
  
 }

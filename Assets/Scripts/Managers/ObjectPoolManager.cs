@@ -1,12 +1,15 @@
 public class ObjectPoolManager : Singleton<ObjectPoolManager>
 {
     /// <summary>
-    /// ¿ÀºêÁ§Æ® Ç®¸µ
+    /// ì˜¤ë¸Œì íŠ¸ í’€ë§
     /// </summary>
-    /// <param name="T"> ¿ÀºêÁ§Æ® Ç®¸µÇÒ ¿ÀºêÁ§Æ®ÀÇ root class ¹× interface¸¦ ÁöÁ¤ÇØ¼­ »ç¿ëÇÏ¸éµË´Ï´Ù.</param>
-    /// <param name="T"> T´Â ÇØ´ç  where T : MonoBehaviour, IObjectPoolAble<T> Á¦¾à Á¶°ÇÀ» °¡Áö°í ÀÖ½À´Ï´Ù.</param>
+    /// <param name="T"> ì˜¤ë¸Œì íŠ¸ í’€ë§í•  ì˜¤ë¸Œì íŠ¸ì˜ root class ë° interfaceë¥¼ ì§€ì •í•´ì„œ ì‚¬ìš©í•˜ë©´ë©ë‹ˆë‹¤.</param>
+    /// <param name="T"> TëŠ” í•´ë‹¹  where T : MonoBehaviour, IObjectPoolAble<T> ì œì•½ ì¡°ê±´ì„ ê°€ì§€ê³  ìˆìŠµë‹ˆë‹¤.</param>
     /// 
     /// private ObjectPoolingContainer<T> objectRootClass = new ObjectPoolingContainer<T>();
     ///public ObjectPoolingContainer<T> ObjectRootClass { get => objectRootClass; }
 
+    private ObjectPoolingContainer<Enemy> enemyObjectPools = new ObjectPoolingContainer<Enemy>();
+
+    public ObjectPoolingContainer<Enemy> EnemyObjectPools { get => enemyObjectPools; set => enemyObjectPools = value; }
 }

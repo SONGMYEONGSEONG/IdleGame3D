@@ -37,7 +37,7 @@ public class Player : MonoBehaviour, IDamageAble
         _Inventory = GetComponent<Inventory>();
 
         stateMachine = new PlayerStateMachine(this);
-        stateMachine.ChangeState(stateMachine.RunState);
+        stateMachine.ChangeState(stateMachine.IdleState);
 
         AttackArea.OnEventTakeDamage += TakeDamage;
         OnDisAbleAttackArea();
@@ -68,6 +68,11 @@ public class Player : MonoBehaviour, IDamageAble
         Debug.Log("Player와 Virtual Camera가 메인 카메라와 연결되었습니다.");
 
         EnemySearch.Radius = Data.TargetSearchData.Distance;
+
+    }
+
+    public void Initialize()
+    {
 
     }
 
@@ -128,5 +133,19 @@ public class Player : MonoBehaviour, IDamageAble
     {
         Anim.SetTrigger("Die");
         enabled = false;
+
+        Invoke("PlayerRespawn", 5.0f);
     }
+
+    private void PlayerRespawn()
+    {
+        Anim.SetTrigger("Respawn");
+        enabled = true;
+        transform.position = GameManager.Instance.PlayerSpawnPos;
+        Health.Respawn();
+        Data.curCoin = (int)(Data.curCoin * 0.5f);
+
+    }
+
+
 }

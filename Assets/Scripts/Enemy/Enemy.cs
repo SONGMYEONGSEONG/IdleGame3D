@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Utill;
 
-public class Enemy : MonoBehaviour, IDamageAble
+public class Enemy : MonoBehaviour, IDamageAble , IObjectPoolAble<Enemy>
 {
     [field: SerializeField] public EnemySO Data { get; private set; }
 
@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour, IDamageAble
     private EnemyStateMachine stateMachine; //Enemy 전용 StateMachine으로 변경 
 
     public event Action OnEventDie;
+    public event Action<Enemy> ReturnToPoolObject;
+
     public HealthSystem Health;
 
     private void Awake()
@@ -97,6 +99,13 @@ public class Enemy : MonoBehaviour, IDamageAble
     private void ObjectDestroy()
     {
         //objectpool로 대체될것 
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+        ReturnToPoolObject?.Invoke(this);
+
+        Anim.SetTrigger("Respawn");
+        stateMachine.ChangeState(stateMachine.IdleState);
+        Health.Respawn();
+        enabled = true;
+
     }
 }

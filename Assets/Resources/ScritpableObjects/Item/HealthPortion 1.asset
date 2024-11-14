@@ -15,10 +15,10 @@ MonoBehaviour:
   ItemID: 1001
   ItemType: 0
   IsEquip: 0
-  ItemName: "\uD68C\uBCF5 \uBB3C\uC57D"
-  ItemDesc: "\uC0AC\uC6A9\uD558\uBA74 HP\uAC00 10% \uD68C\uBCF5 \uB429\uB2C8\uB2E4."
+  ItemName: "\uC5D8\uB9AD\uC11C"
+  ItemDesc: "\uC0AC\uC6A9\uD558\uBA74 HP\uAC00 30% \uD68C\uBCF5 \uB429\uB2C8\uB2E4."
   ItemSprite: {fileID: 21300000, guid: ba64f961c58f5a849a464c7f3f1eba40, type: 3}
   ItemEffect:
   - ItemStatusType: 0
     IsValuePercent: 1
-    ItemValueAmount: 10
+    ItemValueAmount: 30
