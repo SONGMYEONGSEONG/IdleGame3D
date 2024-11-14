@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour, IDamageAble , IObjectPoolAble<Enemy>
     public event Action<Enemy> ReturnToPoolObject;
 
     public HealthSystem Health;
+    public float StageModifier = 1.0f;
 
     private void Awake()
     {
@@ -75,7 +76,8 @@ public class Enemy : MonoBehaviour, IDamageAble , IObjectPoolAble<Enemy>
 
     public int GetCurrentAttackDamage()
     {
-        return stateMachine.AttackState.AttackInfoData.Damage + Data.ExtraDamage;
+        float damageResult = stateMachine.AttackState.AttackInfoData.Damage * StageModifier;
+        return (int)(stateMachine.AttackState.AttackInfoData.Damage + damageResult);
     }
 
     void OnDie()
@@ -85,8 +87,10 @@ public class Enemy : MonoBehaviour, IDamageAble , IObjectPoolAble<Enemy>
 
         //Enemy가 죽음으로써 플레이어의 재화를 증가시켜줌
         GameManager.Instance.Player.Data.curCoin += Data.DropGold;
-        GameManager.Instance.Player.Data.Exp += Data.DropExp;
+        GameManager.Instance.Player.PlayerGainExp(Data.DropExp);
         DropItem();
+
+        Stage.Instance.EnemyCount++;
 
         Invoke("ObjectDestroy", 0.3f);
     }
@@ -94,13 +98,11 @@ public class Enemy : MonoBehaviour, IDamageAble , IObjectPoolAble<Enemy>
     private void DropItem()
     {
         int dropItemIndex = UnityEngine.Random.Range(0,Data.DropItemList.Length);
-        GameManager.Instance.Player._Inventory.CurItemList.Add(Data.DropItemList[dropItemIndex]);
+        GameManager.Instance.Player._Inventory.GainItem(Data.DropItemList[dropItemIndex]);
     }
 
     private void ObjectDestroy()
     {
-        //objectpool로 대체될것 
-        //Destroy(this.gameObject);
         ReturnToPoolObject?.Invoke(this);
 
         Anim.SetTrigger("Respawn");

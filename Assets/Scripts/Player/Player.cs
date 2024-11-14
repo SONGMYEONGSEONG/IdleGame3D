@@ -123,6 +123,27 @@ public class Player : MonoBehaviour, IDamageAble
         DamageIndicator.PrintDamage(damage);
     }
 
+    public void PlayerGainExp(int gainExp)
+    {
+        Data.Exp += gainExp;
+
+        if (Data.Exp >= Data.MaxExp)
+        {
+            //레벨업
+            Data.Level++;
+            Data.Exp -= Data.MaxExp;
+            Data.MaxExp = (int)(Data.MaxExp + (Data.MaxExp * (Data.Level * 0.1f)));
+
+            Data.ExtraDamage += 2;
+            Data.MaxHealth += 50;
+            Data.MaxMana += 20;
+
+            Health.MaxHealth = Data.MaxHealth;
+            Health.MaxMana = Data.MaxMana;
+        }
+
+      
+    }
 
     public int GetCurrentAttackDamage()
     {

@@ -16,5 +16,20 @@ public class Inventory : MonoBehaviour
     {
         CurItemList.Remove(CurItemList.Find(x => ItemID == x.ItemID));
     }
+
+    public void GainItem(ItemSO GainItemData)
+    {
+        //장비아이템인지 체크
+        if(GainItemData.ItemType == ItemType.Equip)
+        {
+            //현재 소유하고있는 아이템 중에 장착아이템 중복유무가 있는경우 함수 종료
+            if(curItemList.Find(x => GainItemData.ItemID == x.ItemID))
+            {
+                return;
+            }
+        }
+
+        curItemList.Add(GainItemData);
+    }
 }
 

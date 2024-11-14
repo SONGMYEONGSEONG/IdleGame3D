@@ -23,6 +23,8 @@ public class PlayerSO : ScriptableObject
     public int ExtraMana;
     public int ExtraDamage;
 
+    public int curStageLevel;
+
     public List<ItemSO> InventoryData;
 
     [field: SerializeField] public TargetSearchData TargetSearchData { get; private set; }

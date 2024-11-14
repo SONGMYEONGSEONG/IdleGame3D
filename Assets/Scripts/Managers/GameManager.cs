@@ -39,10 +39,6 @@ public class GameManager : Singleton<GameManager>
             _uiMain.PlayerStatusUpdate(player.Health.CurHealth, player.Data.Mana);
             _uiMain.PlayerLevelUpdate(player.Data.Level, player.Data.Exp);
             _uiMain.PlayerGetCoinUpdate(player.Data.curCoin);
-
-            //Debug
-            _uiMain.StageNumberUpadte(1);
-            //
         }
 
     }

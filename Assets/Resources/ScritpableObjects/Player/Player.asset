@@ -17,21 +17,18 @@ MonoBehaviour:
   Mana: 50
   MaxMana: 50
   Level: 1
-  Exp: 10
+  Exp: 900
   MaxExp: 100
-  curCoin: 540
+  curCoin: 234
   ExtraHealth: 0
   ExtraMana: 0
-  ExtraDamage: 4
-  InventoryData:
-  - {fileID: 11400000, guid: cb143c98627b45b4e915019146bd0ab6, type: 2}
-  - {fileID: 11400000, guid: cb143c98627b45b4e915019146bd0ab6, type: 2}
-  - {fileID: 11400000, guid: 69e8851d50f3ef64f82f0fb1c7c18a05, type: 2}
+  ExtraDamage: 0
+  InventoryData: []
   <TargetSearchData>k__BackingField:
     TargetLayer:
       serializedVersion: 2
       m_Bits: 128
-    Distance: 10
+    Distance: 100
   <GroundData>k__BackingField:
     <BaseSpeed>k__BackingField: 5
     <BaseRotationDamping>k__BackingField: 1

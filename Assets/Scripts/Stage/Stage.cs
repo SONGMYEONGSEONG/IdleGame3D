@@ -4,25 +4,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utill;
 
-public class Stage : MonoBehaviour
+public class Stage : Singleton<Stage>
 {
     [SerializeField] private List<ObjectPoolData<Enemy>> prefabes;
 
-   
+    public int EnemyCount = 0; //해당 스테이지에서 잡은 적의 갯수 
+    public int StageClearCount; //스테이지 클리어를 위한 잡은적의 목표 갯수
+    public int StageClearCountModifier = 10; //스테이지 클리어를 위한 적갯수배율
     public float SpawnTime = 4.0f;
-    public float StageNum = 1.0f;
+    public int StageNum = 1;
 
     public GameObject SpawnAreaObject;
     public Collider SpawnArea;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         ObjectPoolManager.Instance.EnemyObjectPools.Initialize(prefabes);
     }
 
     private void Start()
     {
         StartCoroutine(SpawnEnemy());
+        StageClearCount = StageNum * StageClearCountModifier;
+        GameManager.Instance.Player.Data.curStageLevel = StageNum;
+        UIManager.Instance.GetUI<UIMain>("UIMain").StageNumberUpadte(StageNum);
+    }
+
+    private void LateUpdate()
+    {
+        if (EnemyCount >= StageClearCount)
+        {
+            StageNum++;
+            StageClearCount = StageNum * StageClearCountModifier + EnemyCount;
+            GameManager.Instance.Player.Data.curStageLevel = StageNum;
+            UIManager.Instance.GetUI<UIMain>("UIMain").StageNumberUpadte(StageNum);
+        }
     }
 
     private Vector3 RandomSpawn()
@@ -44,7 +61,10 @@ public class Stage : MonoBehaviour
     {
         while(true)
         {
-            ObjectPoolManager.Instance.EnemyObjectPools.PoolObject("Enemy", RandomSpawn());
+            Enemy newEnemy = ObjectPoolManager.Instance.EnemyObjectPools.PoolObject("Enemy", RandomSpawn());
+
+            float StausModifier = StageNum * 0.1f;
+            newEnemy.StageModifier = StausModifier;
 
             yield return new WaitForSeconds(SpawnTime);
         }
