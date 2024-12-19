@@ -34,7 +34,7 @@ SSC_Unity_6gen_IdleGame3D
 
 ---
 
-#### 3. ScriptableObject를 이용하여 데이터 관리
+### 3. ScriptableObject를 이용하여 데이터 관리
 ![image](https://github.com/user-attachments/assets/468fb16f-7504-4b64-9d65-f041cff75192)
 해당 게임에서 필요한 Item,Player스텟,Enemy스텟 등등을 SO로 관리하여 필요할떄 호출하여 사용하고,
 저장/불러오기를 위해 해당 SO에 저장하는 방식으로 사용했습니다. 
